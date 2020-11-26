@@ -62,7 +62,8 @@ class MinHeap:
 
     def get_min(self) -> object:
         """
-        TODO: Write this implementation
+        Returns an object with a minimum key without removing it from the heap.
+        If heap is empty, the method raises an Exception.
         """
         return None
 
