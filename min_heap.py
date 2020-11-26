@@ -1,11 +1,11 @@
 # Course: CS261 - Data Structures
 # Assignment: 5
-# Student:
-# Description:
+# Student: Minkyong Lee
+# Description: Min Heap Implementation
 
 
 # Import pre-written DynamicArray and LinkedList classes
-from a5_include import *
+from a5_include import DynamicArray
 
 
 class MinHeapException(Exception):
@@ -46,9 +46,19 @@ class MinHeap:
 
     def add(self, node: object) -> None:
         """
-        TODO: Write this implementation
+        Adds a new object to the MinHeap maintaining heap property.
+        Runtime complexity of its implementation must be O(logN)
         """
-        pass
+
+        self.heap.append(node)
+        node_index = self.heap.length()-1
+        parent_index = int((node_index-1) / 2)
+
+        # the added node percolates up the tree until it reaches the root or parent node's value is less
+        while node_index > 0 and self.heap.get_at_index(parent_index) > self.heap.get_at_index(node_index):
+            self.heap.swap(parent_index, node_index)
+            node_index = parent_index
+            parent_index = int((node_index-1) / 2)
 
     def get_min(self) -> object:
         """
@@ -96,12 +106,12 @@ if __name__ == '__main__':
     print(h.get_min(), h.get_min())
 
 
-    print("\nPDF - remove_min example 1")
-    print("--------------------------")
-    h = MinHeap([1, 10, 2, 9, 3, 8, 4, 7, 5, 6])
-    while not h.is_empty():
-        print(h, end=' ')
-        print(h.remove_min())
+    # print("\nPDF - remove_min example 1")
+    # print("--------------------------")
+    # h = MinHeap([1, 10, 2, 9, 3, 8, 4, 7, 5, 6])
+    # while not h.is_empty():
+    #     print(h, end=' ')
+    #     print(h.remove_min())
 
 
     print("\nPDF - build_heap example 1")
