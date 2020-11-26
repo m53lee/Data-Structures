@@ -94,13 +94,10 @@ class HashMap:
         # if the same key exists, replace the value of the node with the new value
         if bucket.contains(key) is not None:
             bucket.contains(key).value = value
-
         # if the key doesn't exist, insert the element as a new node
         else:
             bucket.insert(key, value)
-
-        # update number of elements in the hash map
-        self.size += 1
+            self.size += 1
 
     def remove(self, key: str) -> None:
         """
