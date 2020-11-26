@@ -91,19 +91,19 @@ class MinHeap:
         Helper method to percolate node down the tree until the subtree is a valid heap
         Runtime complexity is O(logN)
         """
-        counter = 0
         while cur_index >= 0:
             swap_index = -1
             right_index = 2 * cur_index + 2
             left_index = 2 * cur_index + 1
 
-            # if right child is less than the current node
+            # Case where right child is less than the current node
             if right_index < self.heap.length() and self.heap.get_at_index(right_index) < self.heap.get_at_index(cur_index):
-                if self.heap.get_at_index(left_index) < self.heap.get_at_index(right_index):
+                # check if the left child is less than or equal to the right child. parent node will swap with left child
+                if self.heap.get_at_index(left_index) <= self.heap.get_at_index(right_index):
                     swap_index = left_index
                 else:
                     swap_index = right_index
-            # if left child is less than the current node
+            # Case where left child is less than the current node
             elif left_index < self.heap.length() and self.heap.get_at_index(left_index) < self.heap.get_at_index(cur_index):
                 swap_index = left_index
 
