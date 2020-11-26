@@ -143,7 +143,7 @@ class HashMap:
         """
 
         # create a new table with the new capacity if new_capacity is greater than 1
-        if new_capacity > 1:
+        if new_capacity > 0:
             resized_table = DynamicArray()
             for _ in range(new_capacity):
                 resized_table.append(LinkedList())
