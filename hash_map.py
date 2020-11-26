@@ -70,7 +70,6 @@ class HashMap:
                 self.size -= self.buckets.get_at_index(i).length()   # reduce self.size by length of linked list
                 self.buckets.set_at_index(i, LinkedList())
 
-
     def get(self, key: str) -> object:
         """
         Returns the value associated with the given key.
@@ -92,10 +91,13 @@ class HashMap:
         """
         bucket = self.buckets.get_at_index(self.new_index(key))
 
-        # same key already exists in the bucket, remove the node from the linked list first before inserting new
-        if self.contains_key(key) is True:
-            self.remove(key)
-        bucket.insert(key, value)
+        # if the same key exists, replace the value of the node with the new value
+        if bucket.contains(key) is not None:
+            bucket.contains(key).value = value
+
+        # if the key doesn't exist, insert the element as a new node
+        else:
+            bucket.insert(key, value)
 
         # update number of elements in the hash map
         self.size += 1
