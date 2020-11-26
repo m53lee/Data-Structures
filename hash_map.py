@@ -59,7 +59,7 @@ class HashMap:
     def new_index(self, key):
         """Helper method to calculate the index to insert an element to the hash map"""
         hash = self.hash_function(key)
-        return abs(hash) % self.buckets.length()
+        return abs(hash) % self.capacity
 
     def clear(self) -> None:
         """
@@ -133,7 +133,7 @@ class HashMap:
         """
         Returns the current hash table load factor.
         """
-        return self.size / self.buckets.length()
+        return self.size / self.capacity
 
     def resize_table(self, new_capacity: int) -> None:
         """
@@ -156,10 +156,10 @@ class HashMap:
         # Walk through each bucket in the temp_table and visit each element
         for i in range(temp_table.length()):
             temp_bucket = temp_table.get_at_index(i)
-            if temp_bucket is not None:
+            if temp_bucket:
                 cur = temp_bucket.head
                 # insert the element into the new hash table at the rehashed index
-                while cur is not None:
+                while cur:
                     self.put(cur.key, cur.value)
                     cur = cur.next
 
