@@ -66,8 +66,10 @@ class HashMap:
         Clears the contents of the hash map. It does not change the underlying hash table capacity.
         """
         for i in range(self.buckets.length()):
-            self.size -= self.buckets.get_at_index(i).length()   # reduce self.size by length of linked list
-            self.buckets.set_at_index(i, LinkedList())
+            if self.buckets.get_at_index(i).length() > 0:
+                self.size -= self.buckets.get_at_index(i).length()   # reduce self.size by length of linked list
+                self.buckets.set_at_index(i, LinkedList())
+
 
     def get(self, key: str) -> object:
         """
@@ -241,7 +243,7 @@ if __name__ == "__main__":
 
     print("\nPDF - clear example 2")
     print("---------------------")
-    m = HashMap(50, hash_function_1)
+    m = HashMap(100, hash_function_1)
     print(m.size, m.capacity)
     m.put('key1', 10)
     print(m.size, m.capacity)
