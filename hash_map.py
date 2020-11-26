@@ -142,26 +142,27 @@ class HashMap:
         If new_capacity is less than 1, this method should do nothing.
         """
 
-        # create a new table with the new capacity
-        resized_table = DynamicArray()
-        for _ in range(new_capacity):
-            resized_table.append(LinkedList())
+        # create a new table with the new capacity if new_capacity is greater than 1
+        if new_capacity > 1:
+            resized_table = DynamicArray()
+            for _ in range(new_capacity):
+                resized_table.append(LinkedList())
 
-        # assign the current hash table in temp_table & reassign self.buckets to the resized_table
-        temp_table = self.buckets
-        self.buckets = resized_table
-        self.capacity = new_capacity
-        self.size = 0
+            # assign the current hash table in temp_table & reassign self.buckets to the resized_table
+            temp_table = self.buckets
+            self.buckets = resized_table
+            self.capacity = new_capacity
+            self.size = 0
 
-        # Walk through each bucket in the temp_table and visit each element
-        for i in range(temp_table.length()):
-            temp_bucket = temp_table.get_at_index(i)
-            if temp_bucket:
-                cur = temp_bucket.head
-                # insert the element into the new hash table at the rehashed index
-                while cur:
-                    self.put(cur.key, cur.value)
-                    cur = cur.next
+            # Walk through each bucket in the temp_table and visit each element
+            for i in range(temp_table.length()):
+                temp_bucket = temp_table.get_at_index(i)
+                if temp_bucket.length() > 0:
+                    cur = temp_bucket.head
+                    # insert the element into the new hash table at the rehashed index
+                    while cur:
+                        self.put(cur.key, cur.value)
+                        cur = cur.next`
 
     def get_keys(self) -> DynamicArray:
         """
