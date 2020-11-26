@@ -162,7 +162,7 @@ class HashMap:
                     # insert the element into the new hash table at the rehashed index
                     while cur:
                         self.put(cur.key, cur.value)
-                        cur = cur.next`
+                        cur = cur.next
 
     def get_keys(self) -> DynamicArray:
         """
